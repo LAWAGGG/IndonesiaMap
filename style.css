@@ -18,7 +18,7 @@ svg{
 }
 
 body {
-    background-color: white;
+    background-color: #C8EBFF;
 }
 
 .pinpointModal,
@@ -51,6 +51,7 @@ body {
 .topForm {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .active {
@@ -75,4 +76,17 @@ body {
 
 .hide {
     display: none !important;
+}
+
+.instructionModal{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    border: 1px solid black;
 }

@@ -8,11 +8,19 @@ let connectModal = document.getElementById("connectModal")
 let connectForm = document.getElementById("connectForm")
 let distanceInput = document.getElementById("distanceInput")
 let modeSelect = document.getElementById("modeSelect")
+let instructionModal = document.getElementById("instructionModal")
+let btnModalClose = document.getElementById("btnModalClose")
 
 let isConnect = false
 let fromConnectId
 let toConnectId
 let rectFrom
+
+let isInstructionClose = localStorage.getItem("isClosed") || false
+
+if(isInstructionClose == "true"){
+    instructionModal.classList.add("hide")
+}
 
 let pinpoints = JSON.parse(localStorage.getItem("pinpoints")) || []
 let connections = JSON.parse(localStorage.getItem("connections")) || []
@@ -34,6 +42,11 @@ pinpoints.forEach(pin => { createPinpoints(pin) })
 connections.forEach(connect => { createConnection(connect) })
 
 btnPinClose.addEventListener("click",()=>{pinpointModal.classList.add("hide")})
+btnModalClose.addEventListener("click",()=>{
+    instructionModal.classList.add("hide")
+
+    localStorage.setItem("isClosed", true)
+})
 btnConnClose.addEventListener("click",()=>{
     connectModal.classList.add("hide")
     isActive = false
@@ -104,7 +117,7 @@ function createPinpoints(pinpoin) {
     let text = createElement("text", {
         fill: "black", y: "17", x: "6"
     })
-    text.textContent = nameInput.value
+    text.textContent = pinpoin.name
     let btnConnect = createElement("image", {
         href: "asset/connection.svg", width: "20", height: "20", x: "70", y: "3"
     })
@@ -171,9 +184,9 @@ function createConnection(connection) {
 
     let line = createElement("line", {
         x1: fromConnect.x,
-        y1: connection.mode == "train" ? fromConnect.y + 5 : (connection.mode == "bus" ? fromConnect.y - 5 : fromConnect.y),
+        y1: connection.mode == "train" ? fromConnect.y + 10 : (connection.mode == "bus" ? fromConnect.y - 10 : fromConnect.y),
         x2: toConnect.x,
-        y2: connection.mode == "train" ? toConnect.y + 5 : (connection.mode == "bus" ? toConnect.y - 5 : toConnect.y),
+        y2: connection.mode == "train" ? toConnect.y + 10 : (connection.mode == "bus" ? toConnect.y - 10 : toConnect.y),
         stroke: connection.mode == "train" ? "#33E339" : (connection.mode == "bus" ? "#A83BE8" : "#000000"),
         "stroke-width": 4
     })
