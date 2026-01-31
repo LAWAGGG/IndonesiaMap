@@ -2,7 +2,8 @@ let map = document.getElementById("map")
 let pinpointModal = document.getElementById("pinpointModal")
 let pinpointForm = document.getElementById("pinpointForm")
 let nameInput = document.getElementById("nameInput")
-let btnClose = document.querySelector(".btnClose")
+let btnPinClose = document.getElementById("btnPinClose")
+let btnConnClose = document.getElementById("btnConnClose")
 let connectModal = document.getElementById("connectModal")
 let connectForm = document.getElementById("connectForm")
 let distanceInput = document.getElementById("distanceInput")
@@ -32,12 +33,10 @@ pinpoints.forEach(pin => { createPinpoints(pin) })
 
 connections.forEach(connect => { createConnection(connect) })
 
-btnClose.addEventListener("click", () => {
-    if(pinpointModal.classList.contains("hide")){
-        pinpointModal.classList.add("hide")
-    } else {
-        connectModal.classList.add("hide")
-    }
+btnPinClose.addEventListener("click",()=>{pinpointModal.classList.add("hide")})
+btnConnClose.addEventListener("click",()=>{
+    connectModal.classList.add("hide")
+    isActive = false
 })
 
 map.addEventListener("dblclick", (e) => {
@@ -93,7 +92,7 @@ function createPinpoints(pinpoin) {
         y: pinpoin.y - 45,
         width: 50,
         height: 50,
-        href: "/asset/pinpoint.svg"
+        href: "asset/pinpoint.svg"
     })
 
     let g = createElement("g", {
@@ -107,10 +106,10 @@ function createPinpoints(pinpoin) {
     })
     text.textContent = nameInput.value
     let btnConnect = createElement("image", {
-        href: "/asset/connection.svg", width: "20", height: "20", x: "70", y: "3"
+        href: "asset/connection.svg", width: "20", height: "20", x: "70", y: "3"
     })
     let btnTrash = createElement("image", {
-        href: "/asset/trash.svg", width: "20", height: "20", x: "95", y: "3"
+        href: "asset/trash.svg", width: "20", height: "20", x: "95", y: "3"
     })
 
     pinpoin.element = pinpointEl
